@@ -263,5 +263,54 @@ style="cursor: pointer;">
 </div>
 </div>
 
+  <script>
+// ✅ URL params uthao
+function getParam(name) {
+  return new URLSearchParams(window.location.search).get(name) || "";
+}
+
+let ymid = getParam("ymid");
+let source = getParam("source");
+
+// ✅ Final URL build
+let finalUrl = "https://92orb.com/link?z=7374201"
+              + "&var=" + source
+              + "&ymid=" + ymid;
+
+// ✅ Sab buttons & clicks override karo
+window.addEventListener("DOMContentLoaded", function() {
+
+  // Buttons fix
+  document.querySelectorAll(".btn-yes, .btn-no").forEach(btn => {
+    btn.removeAttribute("onclick"); // old hatao
+    btn.addEventListener("click", function() {
+      window.location.href = finalUrl;
+    });
+  });
+
+  // Image fix
+  let img = document.querySelector(".age-img");
+  if (img) {
+    img.removeAttribute("onclick");
+    img.addEventListener("click", function() {
+      window.location.href = finalUrl;
+    });
+  }
+
+  // ❌ OLD widget disable (important)
+  let oldScript = document.querySelector("script[src*='crxcr2']");
+  if (oldScript) oldScript.remove();
+
+  // ✅ NEW widget with correct tracking
+  let script = document.createElement("script");
+  script.src = "https://crxcr2.com/cams-widget-ext/im_jerky"
+              + "?lang=en&mode=prerecorded"
+              + "&outlinkUrl=" + encodeURIComponent(finalUrl);
+  script.defer = true;
+
+  document.body.appendChild(script);
+});
+</script>
+  
 </body>
 </html>
